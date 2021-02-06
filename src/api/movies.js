@@ -67,3 +67,15 @@ export function getMovieByIdApi(idMovie) {
         return result;
       });
 }
+
+export function getPopularMoviesApi(page = 1) {
+    const url = `${THEMOVIEDB_API_HOST}/movie/popular?api_key=${THEMOVIEDB_API_KEY}&language=${THEMOVIEDB_LANG}&page=${page}`;
+  
+    return fetch(url)
+      .then((response) => {
+        return response.json();
+      })
+      .then((result) => {
+        return result;
+      });
+  }
