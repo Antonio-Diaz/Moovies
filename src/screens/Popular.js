@@ -12,7 +12,7 @@ import { Rating } from 'react-native-ratings';
 import { getPopularMoviesApi } from '../api/movies';
 import { THEMOVIEDB_BASE_PATH_IMG, CAROUSEL_IMG_SIZE } from '../utils/constants';
 import usePreferences from '../hooks/usePreferences';
-import noImage from '../assets/default-imgage.png';
+import noImage from '../assets/default-img.png';
 import starDark from '../assets/starDark.png';
 import starLight from '../assets/starLight.png';
 

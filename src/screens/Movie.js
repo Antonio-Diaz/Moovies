@@ -6,6 +6,7 @@ import { Rating } from 'react-native-ratings';
 import { getMovieByIdApi } from '../api/movies';
 import { THEMOVIEDB_BASE_PATH_IMG, CAROUSEL_IMG_SIZE } from '../utils/constants';
 import usePreferences from '../hooks/usePreferences';
+import noImage from '../assets/default-img.png';
 import StarDark from '../assets/starDark.png';
 import StarLight from '../assets/starLight.png';
 
@@ -41,7 +42,11 @@ function MovieImage(props) {
         <View style={styles.viewPoster}>
             <Image
                 style={styles.poster}
-                source={{ uri: `${THEMOVIEDB_BASE_PATH_IMG}${CAROUSEL_IMG_SIZE}${posterPath}` }}
+                source={
+                    posterPath
+                        ? { uri: `${THEMOVIEDB_BASE_PATH_IMG}${CAROUSEL_IMG_SIZE}${posterPath}` }
+                        : noImage
+                }
             />
         </View>
     );
