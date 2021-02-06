@@ -3,6 +3,7 @@ import { StyleSheet, View } from 'react-native'
 import { DrawerContentScrollView } from "@react-navigation/drawer";
 import { Drawer, Switch, TouchableRipple, Text } from "react-native-paper";
 import usePreference from "../hooks/usePreferences";
+import firebase from "../utils/firebase";
 
 export default function DrawerContent(props) {
     // destructuring props to get the methods navigation 
@@ -17,7 +18,7 @@ export default function DrawerContent(props) {
 
     return (
         <DrawerContentScrollView>
-            <Drawer.Section>
+            <Drawer.Section title="Sections">
                 <Drawer.Item
                     label="Home"
                     active={active === "home"}
@@ -41,6 +42,10 @@ export default function DrawerContent(props) {
                         <Switch value={theme === 'dark'} onValueChange={toggleTheme} />
                     </View>
                 </TouchableRipple>
+                <Drawer.Item 
+                    label="Logout"
+                    onPress={() => firebase.auth().signOut()    }
+                />
             </Drawer.Section>
         </DrawerContentScrollView>
     )

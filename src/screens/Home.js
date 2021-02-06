@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
-import { Title, Text} from 'react-native-paper';
+import { Title, Text } from 'react-native-paper';
 import { map } from 'lodash';
 import CarouselVertical from '../components/CrouselVertical';
 import CarouselHorizontal from '../components/CarouselHorizontal';
@@ -51,21 +51,20 @@ export default function Home(props) {
 
             <View style={styles.genres}>
                 <Title style={styles.genresTitle}>Movies by Genger</Title>
-                <ScrollView
-                    horizontal
+                <ScrollView horizontal
                     showsHorizontalScrollIndicator={false}
                     style={styles.genreList}>
                     {map(allGenres, (genre) => (
-                        <Text key={genre.id} 
-                              onPress={() => onChangeGenger(genre.id)}
-                              style={[styles.genre, {color: genre.id != isSelected ? "#8697a5" : "#fff"     }]}>
+                        <Text key={genre.id}
+                            onPress={() => onChangeGenger(genre.id)}
+                            style={[styles.genre, { color: genre.id != isSelected ? "#8697a5" : "#fff" }]}>
                             {genre.name}
                         </Text>
                     ))}
                 </ScrollView>
-                { discoverMovies && (
-                    <CarouselHorizontal data={ discoverMovies } navigation = { navigation }/>
-                ) }
+                {discoverMovies && (
+                    <CarouselHorizontal data={discoverMovies} navigation={navigation} />
+                )}
             </View>
         </ScrollView>
     );

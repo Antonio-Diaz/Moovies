@@ -80,6 +80,8 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 450,
         borderRadius: 20,
+        resizeMode: 'contain',
+
     },
     title: {
         marginHorizontal: 10,
