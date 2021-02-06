@@ -30,3 +30,40 @@ export function getGenreMovieApi(idGenres) {
             return arrayGenres;
         });
 }
+
+
+export function getAllGenresApi() {
+    const url = `${THEMOVIEDB_API_HOST}/genre/movie/list?api_key=${THEMOVIEDB_API_KEY}&lenguage=${THEMOVIEDB_LANG}`;
+
+    return fetch(url)
+        .then((response) => {
+            return response.json();
+        })
+        .then((result) => {
+            return result;
+        });
+}
+
+export function getDiscoverMoviesApi(idGenres) {
+    const url = `${THEMOVIEDB_API_HOST}/discover/movie?api_key=${THEMOVIEDB_API_KEY}&with_genres=${idGenres}&language=${THEMOVIEDB_LANG}`;
+
+    return fetch(url)
+      .then((response) => {
+        return response.json();
+      })
+      .then((result) => {
+        return result;
+      });
+}
+
+export function getMovieByIdApi(idMovie) {
+    const url = `${THEMOVIEDB_API_HOST}/movie/${idMovie}?api_key=${THEMOVIEDB_API_KEY}&language=${THEMOVIEDB_LANG}`;
+  
+    return fetch(url)
+      .then((response) => {
+        return response.json();
+      })
+      .then((result) => {
+        return result;
+      });
+}

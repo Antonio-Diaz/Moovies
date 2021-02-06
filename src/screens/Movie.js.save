@@ -1,16 +1,15 @@
+
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, ScrollView, Image } from 'react-native';
 import { Title, Text } from 'react-native-paper';
 import { map } from 'lodash';
-import { Rating } from 'react-native-ratings';
+import { Rating } from 'react-native-rating';
 import { getMovieByIdApi } from '../api/movies';
 import { THEMOVIEDB_BASE_PATH_IMG, CAROUSEL_IMG_SIZE } from '../utils/constants';
-import usePreferences from '../hooks/usePreferences';
-import StarDark from '../assets/starDark.png';
-import StarLight from '../assets/starLight.png';
 
 export default function Movie(props) {
     const { route } = props;
+
     const { id } = route.params;
     const [detailMovie, setDetailMovie] = useState(null);
 
@@ -25,11 +24,8 @@ export default function Movie(props) {
             <ScrollView showsVerticalScrollIndicator={false}>
                 <MovieImage posterPath={detailMovie.poster_path}> </MovieImage>
                 <MovieTitle movie={detailMovie} />
-                <MovieRating
-                    voteCount={detailMovie.vote_count}
-                    voteAverage={detailMovie.vote_average}
-                />
-                <MovieOverview movie={detailMovie} />
+                <MovieRating voteCount={detailMovie.vote_count} voteAverage={detailMovie.vote_average} />
+                <MovieOverview movie={detailMovie}/>
             </ScrollView>
         </>
     );
@@ -79,25 +75,7 @@ function MovieOverview(props) {
 
 function MovieRating(props) {
     const { voteCount, voteAverage } = props;
-    const mean = voteAverage / 2;
-    const { theme } = usePreferences();
 
-    return (
-        <View style={styles.viewRating}>
-            <Rating
-                type="custom"
-                ratingImage={theme === 'dark' ? StarDark : StarLight}
-                ratingColor="#ffc205"
-                ratingBackgroundColor={theme === 'dark' ? '#192734' : '#f0f0f0'}
-                startingValue={mean}
-                imageSize={20}
-                readonly={true}
-                style={{ marginRight: 15 }}
-            />
-            <Text style={styles.mean}>{mean}</Text>
-            <Text style={styles.count}>{voteCount} votes</Text>
-        </View>
-    );
 }
 
 const styles = StyleSheet.create({
@@ -112,12 +90,11 @@ const styles = StyleSheet.create({
     },
     poster: {
         width: '100%',
-        height: 600,
+        height: 500,
         borderBottomLeftRadius: 30,
         borderBottomRightRadius: 30,
     },
     viewInfo: {
-        marginTop: 22,
         marginHorizontal: 30,
     },
     viewGenres: {
@@ -132,20 +109,5 @@ const styles = StyleSheet.create({
         marginTop: 20,
         textAlign: 'justify',
         color: '#8697a5',
-    },
-    viewRating: {
-        marginHorizontal: 30,
-        marginTop: 10,
-        flexDirection: 'row',
-        alignContent: 'space-between',
-        alignItems: 'center',
-    },
-    mean: {
-        fontSize: 16,
-        marginRight: 5
-    },
-    cout: {
-        fontSize: 12,
-        color: '#8697a5'
-    }
+      },
 });
