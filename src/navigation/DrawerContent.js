@@ -22,7 +22,6 @@ export default function DrawerContent(props) {
                 <Drawer.Item
                     label="Home"
                     active={active === "home"}
-                    style={}
                     onPress={() => onChangeScreen("home")}
                 />
                 <Drawer.Item
