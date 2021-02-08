@@ -1,99 +1,111 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import {
-    StyleSheet,
-    View,
-    Image,
-    Dimensions,
-    TouchableWithoutFeedback,
+  StyleSheet,
+  View,
+  Image,
+  Dimensions,
+  TouchableWithoutFeedback,
 } from 'react-native';
-import { Text, Title } from 'react-native-paper';
+import {Text, Title} from 'react-native-paper';
 import Carousel from 'react-native-snap-carousel';
-import { map, size } from 'lodash';
-import { THEMOVIEDB_BASE_PATH_IMG, CAROUSEL_IMG_SIZE } from '../utils/constants';
-import { getGenreMovieApi } from '../api/movies';
+import {map, size} from 'lodash';
+import FastImage from 'react-native-fast-image';
+import {THEMOVIEDB_BASE_PATH_IMG, CAROUSEL_IMG_SIZE} from '../utils/constants';
+import {getGenreMovieApi} from '../api/movies';
 
-const { width } = Dimensions.get('window');
+const {width} = Dimensions.get('window');
 const ITEM_WIDTH = Math.round(width * 0.7);
 
 export default function CarouselVertical(props) {
-    const { data, navigation } = props;
+  const {data, navigation} = props;
 
-    return (
-        <Carousel
-            layout={'default'}
-            data={data}
-            renderItem={(item) => <RenderItem data={item} navigation={navigation} />}
-            sliderWidth={width}
-            itemWidth={ITEM_WIDTH}
-            firstItem={1}
-            inactiveSlideScale={0.7}
-        />
-    );
+  return (
+    <Carousel
+      layout={'default'}
+      data={data}
+      renderItem={(item) => <RenderItem data={item} navigation={navigation} />}
+      sliderWidth={width}
+      itemWidth={ITEM_WIDTH}
+      firstItem={1}
+      inactiveSlideScale={0.7}
+    />
+  );
 }
 
 function RenderItem(props) {
-    const { data, navigation } = props;
-    const { id, title, poster_path, genre_ids } = data.item;
-    const [genres, setGenres] = useState(null);
-    const imageUrl = `${THEMOVIEDB_BASE_PATH_IMG}${CAROUSEL_IMG_SIZE}${poster_path}`;
+  const {data, navigation} = props;
+  const {id, title, poster_path, genre_ids} = data.item;
+  const [genres, setGenres] = useState(null);
+  const imageUrl = `${THEMOVIEDB_BASE_PATH_IMG}${CAROUSEL_IMG_SIZE}${poster_path}`;
 
-    useEffect(() => {
-        getGenreMovieApi(genre_ids).then((response) => {
-            setGenres(response);
-        });
-    }, []);
+  useEffect(() => {
+    getGenreMovieApi(genre_ids).then((response) => {
+      setGenres(response);
+    });
+  }, []);
 
-    const onNavigation = () => {
-        navigation.navigate('movie', { id: id })
-    }
+  const onNavigation = () => {
+    navigation.navigate('movie', {id: id});
+  };
 
-    return (
-        <TouchableWithoutFeedback onPress={onNavigation}>
-            <View style={styles.card}>
-                <Image style={styles.image} source={{ uri: imageUrl }} />
-                <Title numberOfLines={1} style={styles.title}>{title}</Title>
-                <View style={styles.genres}>
-                    {genres &&
-                        map(genres, (genre, index) => (
-                            <Text key={index} style={styles.genre}>
-                                {genre}
-                                {index !== size(genres) - 1 && ', '}
-                            </Text>
-                        ))}
-                </View>
-            </View>
-        </TouchableWithoutFeedback>
-    );
+  return (
+    <TouchableWithoutFeedback onPress={onNavigation}>
+      <View style={styles.card}>
+        <FastImage
+          style={styles.image}
+          source={
+            poster_path
+              ? {
+                  uri: imageUrl,
+                  priority: FastImage.priority.normal,
+                }
+              : noImage
+          }
+        />
+        <Title numberOfLines={1} style={styles.title}>
+          {title}
+        </Title>
+        <View style={styles.genres}>
+          {genres &&
+            map(genres, (genre, index) => (
+              <Text key={index} style={styles.genre}>
+                {genre}
+                {index !== size(genres) - 1 && ', '}
+              </Text>
+            ))}
+        </View>
+      </View>
+    </TouchableWithoutFeedback>
+  );
 }
 
 const styles = StyleSheet.create({
-    card: {
-        shadowColor: '#000',
-        shadowOffset: {
-            width: 0,
-            height: 10,
-        },
-        shadowOpacity: 1,
-        shadowRadius: 10,
+  card: {
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 10,
     },
-    image: {
-        width: '100%',
-        height: 450,
-        borderRadius: 20,
-        resizeMode: 'contain',
-
-    },
-    title: {
-        marginHorizontal: 10,
-        marginTop: 10,
-    },
-    genres: {
-        flexDirection: 'row',
-        marginHorizontal: 10,
-    },
-    genre: {
-        fontSize: 14,
-        fontWeight: 'bold',
-        color: '#8997a5',
-    },
+    shadowOpacity: 1,
+    shadowRadius: 10,
+  },
+  image: {
+    width: '100%',
+    height: 450,
+    borderRadius: 20,
+    resizeMode: 'contain',
+  },
+  title: {
+    marginHorizontal: 10,
+    marginTop: 10,
+  },
+  genres: {
+    flexDirection: 'row',
+    marginHorizontal: 10,
+  },
+  genre: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: '#8997a5',
+  },
 });

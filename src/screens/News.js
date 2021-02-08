@@ -3,6 +3,7 @@ import { StyleSheet, View, ScrollView, Dimensions, Image, TouchableWithoutFeedba
 import { Button, Text } from 'react-native-paper';
 import { map } from 'lodash';
 import { getNewsMoviesApi } from '../api/movies';
+import FastImage from 'react-native-fast-image'
 import noImage from '../assets/default-img.png';
 import { THEMOVIEDB_BASE_PATH_IMG, CAROUSEL_IMG_SIZE } from '../utils/constants';
 import usePreferences from '../hooks/usePreferences';
@@ -63,7 +64,7 @@ function Movie(props) {
     return (
         <TouchableWithoutFeedback onPress={goMovie}>
             <View style={styles.movie}>
-                <Image
+                <FastImage
                     style={styles.image}
                     source={
                         poster_path

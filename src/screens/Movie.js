@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, ScrollView, Image } from 'react-native';
+import FastImage from 'react-native-fast-image'
 import { Title, Text } from 'react-native-paper';
 import { map } from 'lodash';
 import { Rating } from 'react-native-ratings';
@@ -40,7 +41,7 @@ function MovieImage(props) {
     const { posterPath } = props;
     return (
         <View style={styles.viewPoster}>
-            <Image
+            <FastImage
                 style={styles.poster}
                 source={
                     posterPath
