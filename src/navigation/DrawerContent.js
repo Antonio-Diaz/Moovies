@@ -22,6 +22,7 @@ export default function DrawerContent(props) {
                 <Drawer.Item
                     label="Home"
                     active={active === "home"}
+                    style={}
                     onPress={() => onChangeScreen("home")}
                 />
                 <Drawer.Item
@@ -35,7 +36,7 @@ export default function DrawerContent(props) {
                     onPress={() => onChangeScreen("popular")}
                 />
             </Drawer.Section>
-            <Drawer.Section title="Settings">
+            <Drawer.Section title="Preferences">
                 <TouchableRipple>
                     <View style={styles.preference}>
                         <Text>Dark Theme</Text>

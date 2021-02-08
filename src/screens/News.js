@@ -94,8 +94,11 @@ const styles = StyleSheet.create({
         height: '100%',
     },
     buttonContainer: {
-        paddingTop: 10,
-        paddingBottom: 30,
+        backgroundColor: "#C30A0D",
+        borderRadius: 10,
+        paddingVertical: 10,
+        paddingHorizontal: 12
+
     },
     loadMore: {
         backgroundColor: 'transparent',

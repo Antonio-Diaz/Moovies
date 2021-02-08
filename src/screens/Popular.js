@@ -149,8 +149,10 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   lodadMoreContainer: {
-    paddingTop: 10,
-    paddingBottom: 30,
+    backgroundColor: "#C30A0D",
+    borderRadius: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 12
   },
   loadMore: {
     backgroundColor: 'transparent',
