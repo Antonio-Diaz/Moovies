@@ -92,8 +92,18 @@ function defaultValue() {
 
 const styles = StyleSheet.create({
     btnText: {
-        color: '#fff',
         fontSize: 18,
+        marginBottom: 25,
+        fontSize: 18,
+        color: "#fff",
+        fontWeight: "bold",
+        alignSelf: "center",
+        textTransform: "uppercase",
+        elevation: 8,
+        backgroundColor: "#C30A0D",
+        borderRadius: 10,
+        paddingVertical: 10,
+        paddingHorizontal: 12
     },
     input: {
         height: 50,
